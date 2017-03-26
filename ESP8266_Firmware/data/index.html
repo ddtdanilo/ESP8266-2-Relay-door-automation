@@ -1,0 +1,94 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+<script>
+var ipValue;
+var connection;
+
+ipValue = "ws://192.168.1.1:81/";   
+connection = new WebSocket(ipValue, ['arduino']);   
+
+//console.log(text)
+console.log("IP value changed to:"+ipValue);    
+connection.onopen = function () {
+    connection.send('Websocket funcionando!' + new Date()); 
+    connection.send('ping');
+    //ws.send("Hello, Ardunio");
+};
+connection.onerror = function (error) {
+    console.log('WebSocket Error ', error);
+};
+connection.onmessage = function (e) {
+    console.log('Server: ', e.data);
+    
+};
+function rele1On() {
+    var toSend = "1";
+    connection.send(toSend); 
+};
+function rele2On() {
+    var toSend = "2";
+    connection.send(toSend); 
+};
+function rele1Off() {
+    var toSend = "3";
+    connection.send(toSend); 
+};
+function rele2Off() {
+    var toSend = "4";
+    connection.send(toSend); 
+};
+function rele1y2On() {
+    var toSend = "5";
+    connection.send(toSend); 
+};
+function rele1y2Off() {
+    var toSend = "6";
+    connection.send(toSend); 
+};
+function releToggle() {
+    var toSend = "7";
+    connection.send(toSend); 
+};
+
+</script>
+
+    <title>Control de relés - Lab. de Potencia</title>
+
+    <!-- Bootstrap -->
+</head>
+<body>
+        <h2>Control de relés - Lab. de Potencia</h2>
+       
+
+<button type="button"  onclick="rele1On()">Encender relé 1</button>
+
+
+
+<button type="button"  onclick="rele1Off()">Apagar relé 1</button>
+
+
+
+<button type="button" onclick="rele2On()">Encender relé 2</button>
+
+
+
+<button type="button"  onclick="rele2Off()">Apagar relé 2</button>
+
+<button type="button" onclick="rele1y2On()">Encender relé 1 y 2</button>
+
+
+<button type="button"  onclick="rele1y2Off()">Apagar relé 1 y 2</button>
+<button type="button"  onclick="releToggle()">Cambiar estado de relés</button>
+
+
+
+
+</body>
+</html>
